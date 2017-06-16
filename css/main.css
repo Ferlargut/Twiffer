@@ -1,0 +1,20 @@
+
+html{
+   font-family: 'Indie Flower', cursive;
+}
+body{
+    background-color: #F0E68C;
+}
+img {
+    width: 62px;
+    border: 1px solid white;
+}
+h1{
+    margin: 0;
+}
+nav{
+    background-color: #ff9800;
+}
+.usuario{
+    background-color: #FFFACD;
+}

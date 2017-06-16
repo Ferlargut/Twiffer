@@ -1,56 +1,32 @@
-var contadorClick=0;
-function crearFlies() {
-    event.preventDefault();
 
-    var lugarCaracteres = document.getElementById("contadorCaracteres");
-    var lugar = document.getElementById("mostrarFlies");
-    var articulo = document.createElement("article");
-    var h3 = document.createElement("h3");
-    var parrafo = document.createElement("p");
-    var autor = document.getElementById("autor");
-    var twoit = document.getElementById("flies");
+var cargarPagina = function () {
+    $("#publicar").click(crearTwifer);
+    $(".twifer").on("click",borrarTwifer);
+};
+var $twiFers = $("#coment");
+var plantillaTwifer =
+                    "<div class='contentTwifer card light-blue lighten-3'>"+
+                        "<div class='card-content white-text'>"+
+                            "<span class='card-title'>__autor__</span>"+
+                            "<p>__twifer__</p>"+
+                        "</div>"+
+                        "<div class='card-action'>"+
+                            "<button type='submit' class='twifer btn waves-effect waves-light' type='button'>borrar</button>"+                            
+                        "</div>"
+                    "</div>";
 
-    lugar.appendChild(articulo);    
-    articulo.appendChild(parrafo);
-    articulo.appendChild(h3);
+var borrarTwifer = function () {
+ $(this).parents(".contentTwifer").remove();
+};       
+var crearTwifer = function (e) {
+    e.preventDefault();
+    var $autor = $("#input_text");
+    var $twifer = $("#textarea1");
+    var $imprimirTwifer = plantillaTwifer.replace("__autor__",$autor.val()).replace("__twifer__",$twifer.val());
+    $twiFers.prepend($imprimirTwifer);
+    $autor.val("");
+    $twifer.val("");
+    console.log($autor,$twifer);
+};
 
-    parrafo.innerText=twoit.value;
-    h3.innerText="De: "+autor.value;       
-    
-    twoit.value="";
-    autor.value="";
-    contador=0;
-    lugarCaracteres.innerText=contador;
-    lugarCaracteres.style.color="#000000";
-    event.stopPropagation();
-    
-
-}
-function contadorCaracteres() {
-    event.preventDefault();
-    var textarea = document.getElementById("flies");
-    var lugar = document.getElementById("contadorCaracteres");
-    var cercaAlMaximo=100;
-    var maximo=140;
-    lugar.innerText=textarea.textLength;
-
-        if (textarea.textLength>=cercaAlMaximo){
-        lugar.style.color="#DC143C";       
-    } if (textarea.textLength<cercaAlMaximo){
-        lugar.style.color="#000000"
-    }
-    event.stopPropagation();
-}
-
-
-document.addEventListener("click",contador);
-document.getElementById("creando").addEventListener("click",crearFlies);
-document.getElementById("flies").addEventListener("click",contadorCaracteres);
-document.getElementById("autor").addEventListener("click",contadorCaracteres);
-
-function contador() {
-    var lugar = document.getElementById("contadorClicks");
-    lugar.innerText = " "+contadorClick;    
-    contadorClick++
-    
-    }
+$(document).ready(cargarPagina);
